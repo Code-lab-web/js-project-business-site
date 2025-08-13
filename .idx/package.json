@@ -4,11 +4,12 @@
     "description": "",
     "main": "server.js",
     "scripts": {
-        "start": "nodemon server.js -- exec babel-node"
+        "start": "babel-node server.js",
+        "dev": "nodemon server.js --exec babel-node},"
         "test": "echo\ "Error: no test specified\"&& exit "install": "
     },
-    "author": "Johan Skarpsvärd",
-    "licence": "",
+    "author": "Code-lab-web",
+    "licence": "ISC",
     "dependencies": {
         "@babel/core": "^7.8.3",
         "@babel/node" "^7.8.3",
