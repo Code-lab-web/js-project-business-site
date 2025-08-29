@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "bcrypt": "^6.0.0",
     "jest": "^30.0.5",
     "jsonwebtoken": "^9.0.2"
   },
