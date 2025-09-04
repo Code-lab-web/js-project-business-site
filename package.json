@@ -5,10 +5,12 @@
     "cors": "^2.8.5",
     "express": "^5.1.0",
     "express-session": "^1.18.2",
+    "global": "^4.4.0",
     "jest": "^30.0.5",
     "jsonwebtoken": "^9.0.2",
     "passport": "^0.7.0",
-    "passport-facebook": "^3.0.0"
+    "passport-facebook": "^3.0.0",
+    "state": "^0.2.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.31.0",
