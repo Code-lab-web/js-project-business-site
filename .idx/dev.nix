@@ -14,6 +14,7 @@
     # pkgs.nodePackages.nodemon
     # pkgs.python312Packages.pip
     # pkgs.busybox
+    # pkgs.autorestic
   ];
 
   # Sets environment variables in the workspace
