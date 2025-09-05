@@ -1,3 +1,4 @@
+
 require('dotenv').config();
 
 var createError = require('http-errors');
@@ -8,15 +9,19 @@ var logger = require('morgan');
 var session = require('express-session');
 var passport = require('passport');
 var SQLiteStore = require('connect-sqlite3')(session);
-var indexRouter = require('./routes/index');
-var authRouter = require('./routes/auth');
+
+var indexRouter = express.Router();
+indexRouter.get('/', function(req, res, next) {
+  res.render('login');
+});
+var authRouter = require('./auth');
 
 var app = express();
 
 app.locals.pluralize = require('pluralize');
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', __dirname);
 app.set('view engine', 'ejs');
 
 app.use(logger('dev'));

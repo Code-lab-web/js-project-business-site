@@ -3,7 +3,7 @@ var passport = require('passport');
 var FacebookStrategy = require('passport-facebook');
 var session = require('express-session');
 var passport = require('passport');
-var db = require('../db');
+var db = require('./db');
 var router = express.Router();
 passport.use(new FacebookStrategy({
   clientID: process.env['FACEBOOK_CLIENT_ID'],
