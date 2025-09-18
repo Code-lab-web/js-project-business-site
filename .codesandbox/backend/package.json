@@ -1,7 +1,0 @@
-"author": "Code-lab-web",
-  "license": "(ISC OR GPL-3.0)",
-{
-    "scripts":{
-        "test": "jest"
-    }
-}
