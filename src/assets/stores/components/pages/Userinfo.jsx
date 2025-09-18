@@ -1,12 +1,13 @@
-import { useUserStore } from "../stores/userStore"
-export const UserInfo = () => {
-    const { userName, age } = useUserStore()
+import { useUserStore } from "../stores/userStore";
 
-return (
-    <div>
-        <h2> User Profile </h2>
-        <p> User Name: {userName}></p>
-        <p> Age: {age} </p>
-    </div>
-))
-}
+export const UserInfo = () => {
+    const { userName, age } = useUserStore();
+
+    return (
+        <div>
+            <h2>User Profile</h2>
+            <p>User Name: {userName}</p>
+            <p>Age: {age}</p>
+        </div>
+    );
+};
