@@ -1,0 +1,28 @@
+
+/* Mobile devices (320px and up) */
+@media (min-width: 320px) {
+  body {
+    font-size: 16px;
+  }
+}
+
+/* Tablets (768px and up) */
+@media (min-width: 768px) {
+  body {
+    font-size: 18px;
+  }
+}
+
+/* Desktops (1024px and up) */
+@media (min-width: 1024px) {
+  body {
+    font-size: 20px;
+  }
+}
+
+/* Large desktops (1600px and up) */
+@media (min-width: 1600px) {
+  body {
+    font-size: 22px;
+  }
+}
