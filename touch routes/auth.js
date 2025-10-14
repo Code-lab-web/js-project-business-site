@@ -1,4 +1,17 @@
 var express = require('express');
+var express = require('express');
+var passport = require('passport');
+var FacebookStrategy = require('passport-facebook');
+var db = require('../db');
+
+var router = express.Router();
+
+router.get('/login', function(req, res, next) {
+  res.render('login');
+});
+router.get('/login/federated/facebook', passport.authenticate('facebook'));
+module.exports = router;
+var express = require('express');
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook');
 var session = require('express-session');
@@ -31,6 +44,17 @@ passport.use(new FacebookStrategy({
           if (err) { return cb(err); }
           var user = {
             id: id,
+            passport.serializeUser(function(user, cb) {
+              process.nextTick(function() {
+                cb(null, { id: user.id, username: user.username, name: user.name });
+              });
+            });
+            
+            passport.deserializeUser(function(user, cb) {
+              process.nextTick(function() {
+                return cb(null, user);
+              });
+            });
             name: profile.displayName
           };
           return cb(null, user);
@@ -60,6 +84,16 @@ router.get('/login', function(req, res, next) {
   res.render('login');
 });
 router.get('/login/federated/facebook', passport.authenticate('facebook'));
+router.get('/oauth2/redirect/facebook', passport.authenticate('facebook', {
+  router.post('/logout', function(req, res, next) {
+    req.logout(function(err) {
+      if (err) { return next(err); }
+      res.redirect('/');
+    });
+  });
+  successRedirect: '/',
+  failureRedirect: '/login'
+}));
 router.get('/oauth2/redirect/facebook', passport.authenticate('facebook', {
   successRedirect: '/',
   failureRedirect: '/login'

@@ -1,8 +1,18 @@
 import { Form, useLoaderData, useFetcher } from "react-router-dom";
 import type { LoaderFunctionArgs, ActionFunctionArgs } from "react-router-dom";
 
+interface ContactType {
+  id: string;
+  first: string;
+  last: string;
+  avatar: string;
+  twitter: string;
+  notes: string;
+  favorite: boolean;
+}
+
 // Mock data functions - in a real app, these would be in a separate file.
-const contacts = [
+const contacts: ContactType[] = [
   {
     id: "1",
     first: "Your",
@@ -14,11 +24,11 @@ const contacts = [
   },
 ];
 
-async function getContact(id) {
+async function getContact(id: string): Promise<ContactType | null> {
   return contacts.find(contact => contact.id === id) || null;
 }
 
-async function updateContact(id, updates) {
+async function updateContact(id: string, updates: Partial<ContactType>): Promise<ContactType> {
   const contact = await getContact(id);
   if (!contact) {
     throw new Error(`No contact found for ${id}`);
@@ -28,7 +38,7 @@ async function updateContact(id, updates) {
 }
 
 export async function loader({ params }: LoaderFunctionArgs) {
-  const contact = await getContact(params.contactId);
+  const contact = await getContact(params.contactId || "");
   if (!contact) {
     throw new Response("", {
       status: 404,
@@ -40,13 +50,13 @@ export async function loader({ params }: LoaderFunctionArgs) {
 
 export async function action({ request, params }: ActionFunctionArgs) {
   let formData = await request.formData();
-  return updateContact(params.contactId, {
+  return updateContact(params.contactId || "", {
     favorite: formData.get("favorite") === "true",
   });
 }
 
 export default function Contact() {
-  const { contact } = useLoaderData();
+  const { contact } = useLoaderData() as { contact: ContactType };
 
   return (
     <div id="contact">
@@ -86,7 +96,7 @@ export default function Contact() {
           <Form
             method="post"
             action="destroy"
-            onSubmit={(event) => {
+            onSubmit={(event: React.FormEvent) => {
               if (!confirm("Please confirm you want to delete this record.")) {
                 event.preventDefault();
               }
@@ -100,7 +110,7 @@ export default function Contact() {
   );
 }
 
-function Favorite({ contact }) {
+function Favorite({ contact }: { contact: ContactType }) {
   const fetcher = useFetcher();
   let favorite = contact.favorite;
   if (fetcher.formData) {
