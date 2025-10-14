@@ -1,16 +1,18 @@
 import { Form, useLoaderData, redirect, useNavigate } from "react-router-dom";
 import type { ActionFunctionArgs } from "react-router-dom";
-import { updateContact } from "../contacts";
+import { ContactType, updateContact } from "../contacts";
 
 export async function action({ request, params }: ActionFunctionArgs) {
   const formData = await request.formData();
   const updates = Object.fromEntries(formData);
-  await updateContact(params.contactId, updates);
+  if (params.contactId) {
+      await updateContact(params.contactId, updates);
+  }
   return redirect(`/contacts/${params.contactId}`);
 }
 
 export default function EditContact() {
-  const { contact } = useLoaderData();
+  const { contact } = useLoaderData() as { contact: ContactType };
   const navigate = useNavigate();
 
   return (

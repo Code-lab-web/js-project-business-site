@@ -9,7 +9,7 @@ import {
   useNavigation,
   useSubmit,
 } from "react-router-dom";
-import { getContacts, createContact } from "../contacts";
+import { getContacts, createContact, ContactType } from "../contacts";
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const url = new URL(request.url);
@@ -24,7 +24,7 @@ export async function action() {
 }
 
 export default function Root() {
-  const { contacts, q } = useLoaderData();
+  const { contacts, q } = useLoaderData() as { contacts: ContactType[], q: string };
   const navigation = useNavigation();
   const submit = useSubmit();
 
@@ -33,7 +33,7 @@ export default function Root() {
     new URLSearchParams(navigation.location.search).has("q");
 
   useEffect(() => {
-    document.getElementById("q").value = q;
+    (document.getElementById("q") as HTMLInputElement).value = q;
   }, [q]);
 
   return (

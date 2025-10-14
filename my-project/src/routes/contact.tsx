@@ -1,41 +1,6 @@
 import { Form, useLoaderData, useFetcher } from "react-router-dom";
 import type { LoaderFunctionArgs, ActionFunctionArgs } from "react-router-dom";
-
-interface ContactType {
-  id: string;
-  first: string;
-  last: string;
-  avatar: string;
-  twitter: string;
-  notes: string;
-  favorite: boolean;
-}
-
-// Mock data functions - in a real app, these would be in a separate file.
-const contacts: ContactType[] = [
-  {
-    id: "1",
-    first: "Your",
-    last: "Name",
-    avatar: "https://robohash.org/you.png?size=200x200",
-    twitter: "your_handle",
-    notes: "Some notes",
-    favorite: true,
-  },
-];
-
-async function getContact(id: string): Promise<ContactType | null> {
-  return contacts.find(contact => contact.id === id) || null;
-}
-
-async function updateContact(id: string, updates: Partial<ContactType>): Promise<ContactType> {
-  const contact = await getContact(id);
-  if (!contact) {
-    throw new Error(`No contact found for ${id}`);
-  }
-  Object.assign(contact, updates);
-  return contact;
-}
+import { ContactType, getContact, updateContact } from "../contacts";
 
 export async function loader({ params }: LoaderFunctionArgs) {
   const contact = await getContact(params.contactId || "");
