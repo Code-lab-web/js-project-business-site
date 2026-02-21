@@ -27,7 +27,7 @@
     "passport-facebook": "^3.0.0",
     "pluralize": "^8.0.0",
     "python": "^0.0.4",
-    "react-router-dom": "^7.9.0",
+    "react-router-dom": "^7.13.0",
     "sort-by": "^0.0.2",
     "sqlite3": "^5.1.7",
     "state": "^0.2.0",
