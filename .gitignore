@@ -2,3 +2,7 @@
 ..env
 # Local Netlify folder
 .netlify
+
+# Database
+*.db
+sessions.db
